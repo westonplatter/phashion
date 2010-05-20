@@ -1,5 +1,3 @@
-require 'rubygems'
-
 ##
 # Provides a clean and simple API to detect duplicate image files using
 # the pHash library under the covers.
