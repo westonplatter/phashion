@@ -10,8 +10,8 @@ begin
     gem.email = "mperham@gmail.com"
     gem.homepage = "http://github.com/mperham/phashion"
     gem.authors = ["Mike Perham"]
-    gem.add_dependency 'RubyInline'
-    gem.version = '1.0.0'
+    gem.add_development_dependency 'rake-compiler', '>= 0.7.0'
+    gem.version = '1.0.1'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
@@ -50,3 +50,9 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+
+gem 'rake-compiler', '>= 0.7.0'
+require "rake/extensiontask"
+
+Rake::ExtensionTask.new("phashion_ext")
