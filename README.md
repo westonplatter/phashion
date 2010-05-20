@@ -9,7 +9,7 @@ Installation
 
 First you need to install pHash.  pHash requires three libraries: CImg, ffmpeg and libjpeg.  My system already came with libjpeg on it so I didn't have to do anything for it.  YMMV.
 
-Install CImg.h by downloading the latest version from cimg.sf.net and placing the CImg.h header file in /usr/local/include.
+Install CImg.h by downloading the latest version from http://cimg.sf.net and placing the CImg.h header file in /usr/local/include.
 
 If you are working with audio or video, you will need to install ffmpeg:
 

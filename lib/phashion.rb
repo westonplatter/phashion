@@ -87,7 +87,7 @@ if __FILE__ == $0
 
   FILES = %w(86x86-0a1e.jpeg 86x86-83d6.jpeg 86x86-a855.jpeg avatar.jpg)
 
-  images = FILES.map {|f| PHash::Image.new("#{File.dirname(__FILE__) + '/../test/'}#{f}")}
+  images = FILES.map {|f| Phashion::Image.new("#{File.dirname(__FILE__) + '/../test/'}#{f}")}
   # GC.start
   # puts memory
   assert_duplicate images[0], images[1]
