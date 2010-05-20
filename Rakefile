@@ -4,12 +4,14 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "pHash-rb"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.name = "phashion"
+    gem.summary = %Q{Simple wrapper around the pHash library}
+    gem.description = gem.summary
     gem.email = "mperham@gmail.com"
-    gem.homepage = "http://github.com/mperham/pHash-rb"
+    gem.homepage = "http://github.com/mperham/phashion"
     gem.authors = ["Mike Perham"]
+    gem.add_dependency 'RubyInline'
+    gem.version = '1.0.0'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
@@ -43,10 +45,8 @@ task :default => :test
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "pHash-rb #{version}"
+  rdoc.title = "phashion"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
