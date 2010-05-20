@@ -13,7 +13,7 @@ class Phashion
   VERSION = '1.0.0'
   
   class Image
-    DUPE_THRESHOLD = 26
+    DUPE_THRESHOLD = 15
     
     attr_reader :filename
     def initialize(filename)
