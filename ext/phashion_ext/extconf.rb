@@ -1,7 +1,7 @@
 require 'mkmf'
 
-$CFLAGS << "-x c++ #{ENV["CFLAGS"]}"
-$LIBS << "-lpHash #{ENV["LIBS"]}"
+$CFLAGS << " -x c++ #{ENV["CFLAGS"]}"
+$LIBS << " -lpHash #{ENV["LIBS"]}"
 
 # TODO: need to figure this stuff out
 # dir_config 'pHash'
