@@ -9,7 +9,7 @@ require 'inline'
 # int ph_dct_imagehash(const char *file, ulong64 &hash);
 # int ph_hamming_distance(ulong64 hasha, ulong64 hashb);
 
-class Phashion
+module Phashion
   VERSION = '1.0.0'
   
   class Image
@@ -21,12 +21,10 @@ class Phashion
     end
     
     def duplicate?(other)
-      Phashion.hamming_distance(hash_code, other.send(:hash_code)) < DUPE_THRESHOLD
+      Phashion.hamming_distance(fingerprint, other.fingerprint) < DUPE_THRESHOLD
     end
-
-    private
     
-    def hash_code
+    def fingerprint
       @hash ||= Phashion.image_hash_for(@filename)
     end
   end
