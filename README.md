@@ -36,6 +36,10 @@ Now you can install this gem:
 
     gem install phashion
 
+On Linux, I had to use two further flags to get pHash to compile correctly for use as a Ruby extension:
+
+    ./configure --disable-audio-hash --disable-video-hash --disable-pthread -with-pic
+
 Usage
 ---------
 
