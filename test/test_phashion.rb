@@ -29,10 +29,10 @@ class TestPhashion < Test::Unit::TestCase
   private
 
   def assert_duplicate(a, b)
-    raise ArgumentError, "#{a.filename} not dupe of #{b.filename}" unless a.duplicate?(b)
+    assert a.duplicate?(b), "#{a.filename} not dupe of #{b.filename}"
   end
 
   def assert_not_duplicate(a, b)
-    raise ArgumentError, "#{a.filename} dupe of #{b.filename}" if a.duplicate?(b)
+    assert !a.duplicate?(b), "#{a.filename} dupe of #{b.filename}"
   end  
 end
