@@ -49,14 +49,6 @@ Usage
     img1.duplicate?(img2)
     --> true
 
-Left to the reader: add equality semantics so that duplicate images placed in a Ruby set are automatically removed:
-
-    set = Set.new
-    set << img1
-    set << img2
-    set.size
-    --> 1
-
 Author
 ==========
 
