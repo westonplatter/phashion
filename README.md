@@ -9,7 +9,7 @@ Installation
 
 First you need to install pHash.  pHash requires three libraries: CImg, ffmpeg and libjpeg.  My system already came with libjpeg on it so I didn't have to do anything for it.  YMMV.
 
-Install CImg.h by downloading the latest version from http://cimg.sf.net and placing the CImg.h header file in /usr/local/include.
+Install CImg.h by downloading the latest version from http://cimg.sf.net and placing the CImg.h header file in the root of the pHash source.
 
 If you are working with audio or video, you will need to install ffmpeg:
 
@@ -38,7 +38,7 @@ Now you can install this gem:
 
 On Linux, I had to use two further flags to get pHash to compile correctly for use as a Ruby extension:
 
-    ./configure --disable-audio-hash --disable-video-hash --disable-pthread -with-pic
+    ./configure --disable-audio-hash --disable-video-hash --disable-pthread --with-pic
 
 Usage
 ---------
