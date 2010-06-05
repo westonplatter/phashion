@@ -1,6 +1,12 @@
 History
 =========
 
+1.0.2
+-------
+
+* Make installation much easier by distributing and building locally all the native dependencies.
+  This includes pHash 0.9.0 and CImg 1.3.4.
+
 1.0.1
 -------
 

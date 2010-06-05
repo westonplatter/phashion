@@ -5,14 +5,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{phashion}
-  s.version = "1.0.1"
+  s.version = "1.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mike Perham"]
   s.date = %q{2010-06-04}
   s.description = %q{Simple wrapper around the pHash library}
   s.email = %q{mperham@gmail.com}
-  s.extensions = ["ext/extconf.rb"]
+  s.extensions = ["ext/phashion_ext/extconf.rb"]
   s.extra_rdoc_files = [
     "LICENSE",
      "README.md"
@@ -25,10 +25,11 @@ Gem::Specification.new do |s|
      "README.md",
      "Rakefile",
      "TODO.md",
-     "ext/extconf.rb",
-     "ext/pHash-0.9.0.tar.gz",
-     "ext/phashion_ext.c",
+     "ext/phashion_ext/extconf.rb",
+     "ext/phashion_ext/pHash-0.9.0.tar.gz",
+     "ext/phashion_ext/phashion_ext.c",
      "lib/phashion.rb",
+     "phashion.gemspec",
      "test/86x86-0a1e.jpeg",
      "test/86x86-83d6.jpeg",
      "test/86x86-a855.jpeg",

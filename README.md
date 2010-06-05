@@ -9,38 +9,16 @@ and near duplicate multimedia files (images, audio, video).  The wrapper current
 Installation
 -------------
 
-First you need to install pHash.  pHash requires three libraries: CImg, ffmpeg and libjpeg.  My system already came with libjpeg on it so I didn't have to do anything for it.  YMMV.
+You install it just like any other Ruby gem:
 
-Install CImg.h by downloading the latest version from http://cimg.sf.net and placing the CImg.h header file in the root of the pHash source.
+gem install phashion
 
-If you are working with audio or video, you will need to install ffmpeg:
+Phashion is somewhat involved to install as it has a few dependencies.  I've wrapped up those
+dependencies into a custom tarball that is built locally just for this gem so you don't have to
+do anything special.  See the code in `ext/phashion_ext` for more details.
 
-    port install ffmpeg (OR)
-    brew install ffmpeg
-
-Alternatively you can configure pHash to not support audio/video:
-
-    ./configure --disable-audio-hash --disable-video-hash
-
-Download and install the latest pHash tarball from http://phash.org/download/.  With 0.9.0, there are several issues with OSX: I had to disable audio and video support to avoid compilation issues and modify `ph_num_threads` in pHash.cpp to avoid Linux-specific code:
-
-    ./configure --disable-audio-hash --disable-video-hash
-    
-    int ph_num_threads()
-    {
-    	int numCPU = 2;
-    	return numCPU;
-    }
-
-Finally, run `make && make install` to install the pHash binaries.
-
-Now you can install this gem:
-
-    gem install phashion
-
-On Linux, I had to use two further flags to get pHash to compile correctly for use as a Ruby extension:
-
-    ./configure --disable-audio-hash --disable-video-hash --disable-pthread --with-pic
+Because of this complexity, it is possible the gem install will fail on your platform.  I've tested
+it on Mac OSX 10.6 and Ubuntu 8.04 but please contact me if you have installation problems.
 
 Usage
 ---------

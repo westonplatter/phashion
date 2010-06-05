@@ -11,7 +11,7 @@ begin
     gem.homepage = "http://github.com/mperham/phashion"
     gem.authors = ["Mike Perham"]
     gem.add_development_dependency 'rake-compiler', '>= 0.7.0'
-    gem.version = '1.0.1'
+    gem.version = '1.0.2'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
