@@ -11,7 +11,7 @@ Installation
 
 You install it just like any other Ruby gem:
 
-gem install phashion
+    gem install phashion
 
 Phashion is somewhat involved to install as it has a few dependencies.  I've wrapped up those
 dependencies into a custom tarball that is built locally just for this gem so you don't have to
