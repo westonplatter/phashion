@@ -39,7 +39,7 @@ Dir.chdir(HERE) do
     system("cp -f libpHash.a libpHash_gem.a")
     system("cp -f libpHash.la libpHash_gem.la")
   end
-  $LIBS = " -lpHash_gem"
+  $LIBS = " -lpHash_gem -lstdc++"
 end
 
 create_makefile 'phashion_ext'
