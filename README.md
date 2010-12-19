@@ -29,6 +29,11 @@ Usage
     img1.duplicate?(img2)
     --> true
 
+Ask Phashion the hamming distance between two images:
+
+    Phashion.hamming_distance(img1.fingerprint, img2.fingerprint)
+    => 28
+
 Author
 ==========
 
