@@ -9,6 +9,10 @@
 module Phashion
   VERSION = '1.0.2'
   
+  def self.hamming_distance(fingerprint1, fingerprint2)
+    Phashion.hamming_distance(fingerprint, other.fingerprint)
+  end
+
   class Image
     SETTINGS = {
       :dupe_threshold => 15
