@@ -29,10 +29,15 @@ Usage
     img1.duplicate?(img2)
     --> true
 
-Ask Phashion the hamming distance between two images:
+Find the fingerprint of an image:
+
+    img1.fingerprint.to_s(2)
+    --> "1000001000110101101111100100001111011001101001100100110101101010" 
+
+Find the hamming distance between two images:
 
     Phashion.hamming_distance(img1.fingerprint, img2.fingerprint)
-    => 28
+    --> 28
 
 Author
 ==========
