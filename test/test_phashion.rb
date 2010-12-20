@@ -47,6 +47,6 @@ class TestPhashion < Test::Unit::TestCase
   end
 
   def assert_hamming_distance(a, b, c)
-    Phashion.hamming_distance(a.fingerprint, b.fingerprint) == c
+    assert_equal(c, Phashion.hamming_distance(a.fingerprint, b.fingerprint), "Hamming distance is incorrect, it should be #{c}")
   end  
 end
