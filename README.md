@@ -20,6 +20,12 @@ do anything special.  See the code in `ext/phashion_ext` for more details.
 Because of this complexity, it is possible the gem install will fail on your platform.  I've tested
 it on Mac OSX 10.6 and Ubuntu 8.04 but please contact me if you have installation problems.
 
+If you have an error upon install, like:
+
+    ld: library not found for -ljpeg
+
+you need to install libjpeg.  "brew install libjpeg" or "port install jpeg" on OSX.
+
 Usage
 ---------
 

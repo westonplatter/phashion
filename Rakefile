@@ -1,24 +1,6 @@
 require 'rubygems'
 require 'rake'
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "phashion"
-    gem.summary = %Q{Simple wrapper around the pHash library}
-    gem.description = gem.summary
-    gem.email = "mperham@gmail.com"
-    gem.homepage = "http://github.com/mperham/phashion"
-    gem.authors = ["Mike Perham"]
-    gem.add_development_dependency 'rake-compiler', '>= 0.7.0'
-    gem.version = '1.0.2'
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
-end
-
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
@@ -39,7 +21,7 @@ rescue LoadError
   end
 end
 
-task :test => :check_dependencies
+task :test
 
 task :default => :test
 

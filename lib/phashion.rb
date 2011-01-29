@@ -7,7 +7,7 @@
 # int ph_hamming_distance(ulong64 hasha, ulong64 hashb);
 
 module Phashion
-  VERSION = '1.0.2'
+  VERSION = '1.0.3'
   
   class Image
     SETTINGS = {
@@ -27,7 +27,7 @@ module Phashion
       @hash ||= Phashion.image_hash_for(@filename)
     end
   end
-  
+
 end
 
 require 'phashion_ext'

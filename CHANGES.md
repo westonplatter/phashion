@@ -1,6 +1,12 @@
 History
 =========
 
+1.0.3
+-------
+
+* Update pHash to version 0.9.3 and CImg 1.4.7.
+* Fix a few build issues.
+
 1.0.2
 -------
 
