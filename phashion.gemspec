@@ -7,41 +7,15 @@ Gem::Specification.new do |s|
   s.name = %q{phashion}
   s.version = "1.0.3"
   s.authors = ["Mike Perham"]
-  s.date = %q{2010-06-04}
   s.description = %q{Simple wrapper around the pHash library}
   s.email = %q{mperham@gmail.com}
   s.extensions = ["ext/phashion_ext/extconf.rb"]
-  s.files = [
-    ".document",
-     ".gitignore",
-     "CHANGES.md",
-     "LICENSE",
-     "README.md",
-     "Rakefile",
-     "TODO.md",
-     "ext/phashion_ext/extconf.rb",
-     "ext/phashion_ext/pHash-0.9.3.tar.gz",
-     "ext/phashion_ext/phashion_ext.c",
-     "lib/phashion.rb",
-     "phashion.gemspec",
-     "test/86x86-0a1e.jpeg",
-     "test/86x86-83d6.jpeg",
-     "test/86x86-a855.jpeg",
-     "test/avatar.jpg",
-     "test/b32aade8c590e2d776c24f35868f0c7a588f51e1.jpeg",
-     "test/df9cc82f5b32d7463f36620c61854fde9d939f7f.jpeg",
-     "test/e7397898a7e395c2524978a5e64de0efabf08290.jpeg",
-     "test/helper.rb",
-     "test/test_phashion.rb"
-  ]
+  s.files = `git ls-files`.split("\n")
   s.homepage = %q{http://github.com/mperham/phashion}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.summary = %q{Simple wrapper around the pHash library}
-  s.test_files = [
-    "test/helper.rb",
-     "test/test_phashion.rb"
-  ]
+  s.test_files = `git ls-files test`.split("\n")
   s.add_development_dependency(%q<rake-compiler>, [">= 0.7.0"])
 end
 
