@@ -1,6 +1,11 @@
 History
 =========
 
+1.0.4
+-------
+
+* Fix pthread linking on Ubuntu 11.04
+
 1.0.3
 -------
 

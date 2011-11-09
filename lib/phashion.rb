@@ -7,22 +7,22 @@
 # int ph_hamming_distance(ulong64 hasha, ulong64 hashb);
 
 module Phashion
-  VERSION = '1.0.3'
-  
+  VERSION = '1.0.4'
+
   class Image
     SETTINGS = {
       :dupe_threshold => 15
     }
-    
+
     attr_reader :filename
     def initialize(filename)
       @filename = filename
     end
-    
+
     def duplicate?(other)
       Phashion.hamming_distance(fingerprint, other.fingerprint) < SETTINGS[:dupe_threshold]
     end
-    
+
     def fingerprint
       @hash ||= Phashion.image_hash_for(@filename)
     end
