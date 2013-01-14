@@ -34,12 +34,12 @@ Dir.chdir(HERE) do
 
     system("rm -rf #{BUNDLE_PATH}") unless ENV['DEBUG'] or ENV['DEV']
   end
-  
+
   Dir.chdir("#{HERE}/lib") do
     system("cp -f libpHash.a libpHash_gem.a")
     system("cp -f libpHash.la libpHash_gem.la")
   end
-  $LIBS = " -lpthread -lpHash_gem -lstdc++ -ljpeg"
+  $LIBS = " -lpthread -lpHash_gem -lstdc++ -ljpeg -lpng"
 end
 
 create_makefile 'phashion_ext'
