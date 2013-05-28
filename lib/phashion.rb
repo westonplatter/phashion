@@ -7,7 +7,7 @@
 # int ph_hamming_distance(ulong64 hasha, ulong64 hashb);
 
 module Phashion
-  VERSION = '1.0.5'
+  VERSION = '1.0.6'
 
   class Image
     SETTINGS = {
