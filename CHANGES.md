@@ -1,6 +1,13 @@
 History
 =========
 
+1.0.6
+------
+
+* Update pHash to version 0.9.6
+* PNG support added
+* Requiring rdoc tasks fixed
+ 
 1.0.5
 -------
 
