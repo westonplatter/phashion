@@ -35,6 +35,17 @@ Usage
     img1.duplicate?(img2)
     --> true
 
+Testing
+------------
+
+To run the test suite:
+
+```bash
+bundle
+rake compile
+rake
+```
+
 Author
 ==========
 
