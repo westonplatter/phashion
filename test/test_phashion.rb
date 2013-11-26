@@ -34,6 +34,21 @@ class TestPhashion < Test::Unit::TestCase
     assert_duplicate gif, png
     assert_duplicate jpg, gif
   end
+  
+  def test_fingerprint_png_is_different
+    png1 = Phashion::Image.new(File.dirname(__FILE__) + '/png/Broccoli_Super_Food.png')
+    png2 = Phashion::Image.new(File.dirname(__FILE__) + '/png/linux.png')
+    png3 = Phashion::Image.new(File.dirname(__FILE__) + '/png/grass.png')
+    png4 = Phashion::Image.new(File.dirname(__FILE__) + '/png/Broccoli_Super_Food.png')
+    
+    fingerprints = []
+    fingerprints << png1.fingerprint
+    fingerprints << png2.fingerprint
+    fingerprints << png3.fingerprint
+    fingerprints << png4.fingerprint
+    
+    assert fingerprints.uniq.size == 3, "array should contain 3 unique fingerprints"
+  end
 
   private
 
