@@ -1,7 +1,7 @@
 require 'mkmf'
 
 HERE = File.expand_path(File.dirname(__FILE__))
-BUNDLE = Dir.glob("#{HERE}/pHash-*.tar.gz").first
+BUNDLE = Dir.glob("#{HERE}/pHash-.*.tar.gz").first
 BUNDLE_PATH = BUNDLE.gsub(".tar.gz", "")
 $CFLAGS = " -x c++ #{ENV["CFLAGS"]}"
 $includes = " -I#{HERE}/include"
