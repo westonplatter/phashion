@@ -1,6 +1,13 @@
 History
 =========
 
+1.0.7
+------
+* Respository transferred to https://github.com/westonplatter/phashion
+* Added custom pHash patch to support alpha channel PNG files (issue #20 and #23)
+* Link `/user/local/lib` (issue #21)
+* Explicitly include -pthreads flag for cpp compiler (issue #15)
+
 1.0.6
 ------
 
