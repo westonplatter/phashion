@@ -1,6 +1,10 @@
 History
 =========
 
+1.0.8
+------
+* Renamed the pHashion tar.gz archive as "pHash-0.9.6.tar.gz" to solve/enable install from github 
+
 1.0.7
 ------
 * Respository transferred to https://github.com/westonplatter/phashion

@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name          = %q{phashion}
-  s.version       = "1.0.7"
+  s.version       = "1.0.8"
   s.authors       = ["Mike Perham", "Weston Platter"]
   s.email         = ["mperham@gmail.com", "westonplatter@gmail.com"]
   s.description   = %q{Simple wrapper around the pHash library}
