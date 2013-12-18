@@ -30,6 +30,54 @@ extern "C" {
     rb_define_singleton_method(c, "hamming_distance", (VALUE(*)(ANYARGS))hamming_distance, 2);
     rb_define_singleton_method(c, "image_hash_for", (VALUE(*)(ANYARGS))image_hash_for, 1);
   }
+
+#ifdef HAVE_SQLITE3EXT_H
+#include <sqlite3ext.h>
+
+SQLITE_EXTENSION_INIT1
+
+static void hamming_distance(sqlite3_context * ctx, int agc, sqlite3_value **argv)
+{
+  sqlite3_int64 hashes[4];
+  ulong64 left, right;
+  int i, result;
+
+  for(i = 0; i < 4; i++) {
+    if (SQLITE_INTEGER == sqlite3_value_type(argv[i])) {
+      hashes[i] = sqlite3_value_int64(argv[i]);
+    } else {
+      hashes[i] = 0;
+    }
+  }
+
+  left = (hashes[0] << 32) + hashes[1];
+  right = (hashes[2] << 32) + hashes[3];
+  result = ph_hamming_distance(left, right);
+  sqlite3_result_int(ctx, result);
+}
+
+int sqlite3_phashionext_init(
+  sqlite3 *db,
+  char **pzErrMsg,
+  const sqlite3_api_routines *pApi
+){
+  SQLITE_EXTENSION_INIT2(pApi);
+
+  sqlite3_create_function(
+      db,
+      "hamming_distance",
+      4,
+      SQLITE_UTF8,
+      NULL,
+      hamming_distance,
+      NULL,
+      NULL
+  );
+  return SQLITE_OK;
+}
+
+#endif
+
 #ifdef __cplusplus
 }
 #endif
