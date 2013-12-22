@@ -1,6 +1,54 @@
 require 'helper'
+require 'sqlite3'
 
 class TestPhashion < Test::Unit::TestCase
+
+  def split(hash)
+    r = hash & 0xFFFFFFFF
+    l = (hash >> 32) & 0xFFFFFFFF
+    [l, r]
+  end
+
+  def test_db_bad_arg
+    db = SQLite3::Database.new ':memory:'
+    return unless db.respond_to? :enable_load_extension
+
+    db.enable_load_extension true
+    db.load_extension Phashion.so_file
+
+    res = db.execute "SELECT hamming_distance('foo', 'bar', 'baz', 'zot')"
+    assert_equal [[0]], res
+  end
+
+  def test_db_extension
+    db = SQLite3::Database.new ':memory:'
+    return unless db.respond_to? :enable_load_extension
+
+    db.enable_load_extension true
+    db.load_extension Phashion.so_file
+
+    db.execute <<-eosql
+  CREATE TABLE "images" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "fingerprint_l" integer NOT NULL,
+    "fingerprint_r" integer NOT NULL)
+    eosql
+
+    jpg = File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg'
+    png = File.dirname(__FILE__) + '/png/Broccoli_Super_Food.png'
+
+    hash1 = Phashion.image_hash_for jpg
+    hash2 = Phashion.image_hash_for png
+
+    l, r = split hash1
+    db.execute "INSERT INTO images (fingerprint_l, fingerprint_r) VALUES (#{l}, #{r})"
+
+    expected = Phashion.hamming_distance hash1, hash2
+
+    l, r = split hash2
+    rows = db.execute "SELECT hamming_distance(fingerprint_l, fingerprint_r, #{l}, #{r}) FROM images"
+    assert_equal expected, rows.first.first
+  end
 
   def test_duplicate_detection
     files = %w(86x86-0a1e.jpeg 86x86-83d6.jpeg 86x86-a855.jpeg)

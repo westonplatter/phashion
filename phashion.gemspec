@@ -16,5 +16,6 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files test`.split("\n")
   
   s.add_development_dependency "rake-compiler", ">= 0.7.0"
+  s.add_development_dependency "sqlite3"
 end
 

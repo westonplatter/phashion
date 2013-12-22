@@ -6,6 +6,8 @@
 # int ph_dct_imagehash(const char *file, ulong64 &hash);
 # int ph_hamming_distance(ulong64 hasha, ulong64 hashb);
 
+require 'rbconfig'
+
 module Phashion
   VERSION = '1.0.6'
 
@@ -28,6 +30,10 @@ module Phashion
     end
   end
 
+  def self.so_file
+    extname = RbConfig::CONFIG['DLEXT']
+    File.join File.dirname(__FILE__), "phashion_ext.#{extname}"
+  end
 end
 
 require 'phashion_ext'
