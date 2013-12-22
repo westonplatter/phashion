@@ -54,4 +54,4 @@ Mike Perham, http://mikeperham.com, http://twitter.com/mperham, mperham AT gmail
 Copyright
 ----------
 
-Copyright (c) 2010 Mike Perham. See LICENSE for details.
+Copyright (c) 2010-2014 Mike Perham. See LICENSE for details.
