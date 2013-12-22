@@ -18,5 +18,9 @@ coverage
 rdoc
 pkg
 *.gem
+.ruby-version
+.ruby-gemset
+Gemfile.lock
+tmp
 
 ## PROJECT::SPECIFIC
