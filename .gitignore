@@ -24,3 +24,6 @@ Gemfile.lock
 tmp
 
 ## PROJECT::SPECIFIC
+ext/phashion_ext/include/
+ext/phashion_ext/lib/
+lib/phashion_ext.bundle
