@@ -20,6 +20,8 @@ wrapps these dependencies into a custom tarball that is built locally just
 for this gem so you don't have to do anything special. Look in the 
 `ext/phashion_ext` folder for more details.
 
+
+### Compatibility 
 Because of this complexity, it is possible the gem install will fail on your 
 platform. Phashion has been tested on:
 
@@ -28,12 +30,15 @@ platform. Phashion has been tested on:
 * Ubuntu 8.04
 * Ubuntu 12.04
 
-Please open a [GitHub issue](https://github.com/westonplatter/phashion/issues/) 
-if you have installation problems.
+Please open a [GitHub issue](https://github.com/westonplatter/phashion/issues/) if you have installation problems.
 
+### Prerequisites
 
-Common Error: library not found for -ljpeg
-------------------------------------------
+- `libpng`
+- `libjpeg`
+
+Common Error: `library not found for -ljpeg`
+-----------------------------
 
 If you have an error upon install, like:
 
@@ -54,6 +59,30 @@ Usage
     --> true
 
 
+### Threshold for dupe-detection
+
+Currently, the maximum Hamming distance between two duplicate images is set at 15. As per [mperham's explanation](http://www.mikeperham.com/2010/05/21/detecting-duplicate-images-with-phashion/):
+
+> A “perceptual hash” is a 64-bit value based on the discrete cosine transform of the image’s frequency spectrum data. Similar images will have hashes that are close in terms of Hamming distance. That is, a binary hash value of 1000 is closer to 0000 than 0011 because it only has one bit different whereas the latter value has two bits different. The duplicate threshold defines how many bits must be different between two hashes for the two associated images to be considered different images. Our testing showed that 15 bits is a good value to start with, it detected all duplicates with a minimum of false positives.
+
+As a reference point, here are the Hamming distances in these test comparisons using (/test/jpg/Broccoli_Super_Food.jpg)[https://github.com/westonplatter/phashion/blob/master/test/jpg/Broccoli_Super_Food.jpg] as the source image:
+
+
+| Variation                                            | Hamming distance  
+| ---------------------------------------------------- | ----------------: 
+| JPG to PNG                                           | 0
+| Lossy JPG (Photoshop Save for Web quality = 20)      | 0                 
+| Thumbnail (from 500px to 100px)                      | 2
+| Color correction (saturation +20 w auto-correct)     | 2          
+| Black and white                                      | 2
+| Extraneous whitespace cropped (500x349 to 466x312)   | 12
+| A sloppy rotation of 5 degrees clockwise             | 14
+| Horizontally-flipped                                 | 32
+
+
+
+
+
 Gem uses customized pHash 0.9.6
 -------------------------------
 
@@ -63,10 +92,28 @@ In order to detech duplicate alpha PNGs, the gem uses a custom version of pHash
 (https://github.com/westonplatter/phash/commit/ff255d2d3f93c841b98923ecbde997027f21ae36). 
 The gem will be moving back to the pHash master branch once it supports 
 detection of alpha PNG file types.
+
+
 Testing
 -------
 
-To run the test suite:
+### Pre-requisites
+
+If you get an error like this:
+
+    # Running tests:
+
+    .....sh: convert: command not found
+    sh: gm: command not found
+
+&ndash; then you need to install [graphicsmagick](http://www.graphicsmagick.org/) and, optionally, [imagemagick](http://www.imagemagick.org/), if you want to get rid of the message related to `convert`.
+
+Using Homebrew:
+
+    brew install graphicsmagick imagemagick
+
+
+#### To run the test suite:
 
     bundle
     rake compile

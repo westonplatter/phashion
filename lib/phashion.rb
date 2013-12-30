@@ -12,17 +12,22 @@ module Phashion
   VERSION = '1.0.8'
 
   class Image
-    SETTINGS = {
-      :dupe_threshold => 15
-    }
-
+    DEFAULT_DUPE_THRESHOLD = 15
+ 
     attr_reader :filename
     def initialize(filename)
       @filename = filename
     end
 
-    def duplicate?(other)
-      Phashion.hamming_distance(fingerprint, other.fingerprint) < SETTINGS[:dupe_threshold]
+    # returns: an Integer representing the hamming distance from :other
+    def distance_from(other)
+      Phashion.hamming_distance(fingerprint, other.fingerprint)
+    end
+
+    def duplicate?(other, opts={})
+      threshold = opts[:threshold] || DEFAULT_DUPE_THRESHOLD
+
+      distance_from(other) < threshold
     end
 
     def fingerprint
