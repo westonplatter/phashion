@@ -27,7 +27,7 @@ module Phashion
     def duplicate?(other, opts={})
       threshold = opts[:threshold] || DEFAULT_DUPE_THRESHOLD
 
-      distance_from(other) < threshold
+      distance_from(other) <= threshold
     end
 
     def fingerprint

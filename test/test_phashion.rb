@@ -103,11 +103,12 @@ class TestPhashion < Test::Unit::TestCase
 
   def test_duplicate_with_custom_distance_threshold
   # note: this test depends on the smaller_jpg test still asserting a distance of 2
-  # note-2:  threshold is a :less-than, not a :less-than-or-equal-to comparison
+  # note-2: threshold is a :less-than-or-equal-to comparison, which is a change from version 1.0.8
     jpg = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg')
     jpg_x = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.100px.jpg')
 
-    refute(jpg.duplicate?(jpg_x, threshold: 2))    
+    refute(jpg.duplicate?(jpg_x, threshold: 1))    
+    assert(jpg.duplicate?(jpg_x, threshold: 2)) 
   end
 
 

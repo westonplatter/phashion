@@ -37,20 +37,22 @@ Please open a [GitHub issue](https://github.com/westonplatter/phashion/issues/) 
 - `libpng`
 - `libjpeg`
 
-Common Error: `library not found for -ljpeg`
------------------------------
+#### Common Errors 
 
-If you have an error upon install, like:
+You need to install `libjpeg` if you run into this error upon `gem install`:
 
     ld: library not found for -ljpeg
 
-you need to install libjpeg.  If you're on a Mac, you can use 
-[homebrew](http://brew.sh/)  `brew install libjpeg`  or 
-[ports](http://www.macports.org/)  `port install jpeg` .
+If you're on a Mac, you can use:
+
+- [Homebrew](http://brew.sh/)  `brew install libjpeg`
+- or [Macports](http://www.macports.org/)  `port install jpeg` .
 
 
 Usage
 -----
+
+### Testing if one image is a duplicate of another
 
     require 'phashion'
     img1 = Phashion::Image.new(filename1)
@@ -58,6 +60,22 @@ Usage
     img1.duplicate?(img2)
     --> true
 
+Optionally, you can set the minimum Hamming distance in the second argument, an options Hash:
+
+    img1.duplicate?(img2, :threshold => 5)
+    --> true
+
+    img1.duplicate?(img2, :threshold => 0) 
+    --> false
+
+
+### Finding the Hamming distance between two images
+
+    require 'phashion'
+    img1 = Phashion::Image.new(filename1)
+    img2 = Phashion::Image.new(filename2)
+    img1.distance_from(img2)
+    --> 6
 
 ### Threshold for dupe-detection
 
@@ -65,7 +83,7 @@ Currently, the maximum Hamming distance between two duplicate images is set at 1
 
 > A “perceptual hash” is a 64-bit value based on the discrete cosine transform of the image’s frequency spectrum data. Similar images will have hashes that are close in terms of Hamming distance. That is, a binary hash value of 1000 is closer to 0000 than 0011 because it only has one bit different whereas the latter value has two bits different. The duplicate threshold defines how many bits must be different between two hashes for the two associated images to be considered different images. Our testing showed that 15 bits is a good value to start with, it detected all duplicates with a minimum of false positives.
 
-As a reference point, here are the Hamming distances in these test comparisons using (/test/jpg/Broccoli_Super_Food.jpg)[https://github.com/westonplatter/phashion/blob/master/test/jpg/Broccoli_Super_Food.jpg] as the source image:
+As a reference point, here are the Hamming distances in these test comparisons using [/test/jpg/Broccoli_Super_Food.jpg](https://github.com/westonplatter/phashion/blob/master/test/jpg/Broccoli_Super_Food.jpg) as the source image:
 
 
 | Variation                                            | Hamming distance  
