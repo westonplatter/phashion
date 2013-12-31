@@ -1,9 +1,7 @@
 Phashion
 ========
 
-Phashion is a Ruby wrapper around the pHash library, "perceptual hash", which 
-detects duplicate and near duplicate multimedia files (images, audio, video). 
-The wrapper currently only supports images.
+Phashion is a Ruby wrapper around the [pHash library](http://phash.org/), "perceptual hash", which detects duplicate and near-duplicate multimedia files (e.g. images, audio, video, though Phashion currently only supports images.). "Near-duplicates" are images that come from the same source and show essentially the same thing, but may have differences in such features as dimensions, bytesizes, lossy-compression artifacts, and color levels.
 
 [See an overview of Phashion on Mike's blog]
 (http://www.mikeperham.com/2010/05/21/detecting-duplicate-images-with-phashion/).
@@ -36,17 +34,22 @@ Please open a [GitHub issue](https://github.com/westonplatter/phashion/issues/) 
 
 - `libpng`
 - `libjpeg`
-
-#### Common Errors 
-
-You need to install `libjpeg` if you run into this error upon `gem install`:
-
-    ld: library not found for -ljpeg
+- [imagemagick](http://www.imagemagick.org/)
 
 If you're on a Mac, you can use:
 
-- [Homebrew](http://brew.sh/)  `brew install libjpeg`
-- or [Macports](http://www.macports.org/)  `port install jpeg` .
+- [Homebrew](http://brew.sh/), e.g.  `brew install libjpeg`
+- or [Macports](http://www.macports.org/), e.g.  `port install jpeg` .
+
+
+#### Common Errors 
+
+
+
+- `ld: library not found for -ljpeg` &ndash; You need to install `libjpeg` if you run into this error upon `gem install`:
+
+
+- `.....sh: convert: command not found; sh: gm: command not found` &ndash; You need to install [imagemagick](http://www.imagemagick.org/).
 
 
 Usage
@@ -114,21 +117,6 @@ detection of alpha PNG file types.
 
 Testing
 -------
-
-### Pre-requisites
-
-If you get an error like this:
-
-    # Running tests:
-
-    .....sh: convert: command not found
-    sh: gm: command not found
-
-&ndash; then you need to install [graphicsmagick](http://www.graphicsmagick.org/) and, optionally, [imagemagick](http://www.imagemagick.org/), if you want to get rid of the message related to `convert`.
-
-Using Homebrew:
-
-    brew install graphicsmagick imagemagick
 
 
 #### To run the test suite:
