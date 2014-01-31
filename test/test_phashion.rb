@@ -1,7 +1,7 @@
 require 'helper'
 require 'sqlite3'
 
-class TestPhashion < Test::Unit::TestCase
+class TestPhashion < Minitest::Test
 
   def split(hash)
     r = hash & 0xFFFFFFFF
