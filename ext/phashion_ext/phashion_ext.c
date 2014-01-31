@@ -54,6 +54,86 @@ static VALUE hamming_distance(VALUE self, VALUE a, VALUE b) {
     return INT2NUM(result);
 }
 
+static VALUE texthash_for(VALUE self, VALUE file) {
+    int nbpoints, i;
+    VALUE list;
+    VALUE point_class;
+
+    TxtHashPoint *points = ph_texthash(StringValuePtr(file), &nbpoints);
+
+    point_class = rb_const_get(self, rb_intern("TextHashPoint"));
+
+    list = rb_ary_new2((long)nbpoints);
+
+    for(i = 0; i < nbpoints; i++) {
+      VALUE point;
+      VALUE args[2];
+
+      args[0] = ULL2NUM(points[i].hash);
+      args[1] = ULL2NUM(points[i].index);
+
+      point = rb_class_new_instance(2, args, point_class);
+      rb_ary_push(list, point);
+    }
+
+    free(points);
+
+    return list;
+}
+
+static TxtHashPoint * rb2phash_points(VALUE list) {
+    int i;
+    TxtHashPoint * txt_list;
+
+    txt_list = (TxtHashPoint *)xcalloc(RARRAY_LEN(list), sizeof(TxtHashPoint));
+
+    for(i = 0; i < RARRAY_LEN(list); i++) {
+      VALUE elem = rb_ary_entry(list, i);
+      txt_list[i].hash = NUM2ULL(rb_funcall(elem, rb_intern("hash"), 0));
+      txt_list[i].index = NUM2INT(rb_funcall(elem, rb_intern("index"), 0));
+    }
+
+    return txt_list;
+}
+
+static VALUE textmatches_for(VALUE self, VALUE list1, VALUE list2) {
+    int nbmatches, i;
+    VALUE list;
+    VALUE match_class;
+    TxtHashPoint *txt_list1;
+    TxtHashPoint *txt_list2;
+
+    txt_list1 = rb2phash_points(list1);
+    txt_list2 = rb2phash_points(list2);
+
+    TxtMatch *matches = ph_compare_text_hashes(txt_list1, RARRAY_LEN(list1),
+                                               txt_list2, RARRAY_LEN(list2),
+                                               &nbmatches);
+
+    xfree(txt_list1);
+    xfree(txt_list2);
+
+    match_class = rb_const_get(self, rb_intern("TextMatch"));
+
+    list = rb_ary_new2((long)nbmatches);
+
+    for(i = 0; i < nbmatches; i++) {
+      VALUE match;
+      VALUE args[3];
+
+      args[0] = INT2NUM(matches[i].first_index);
+      args[1] = INT2NUM(matches[i].second_index);
+      args[2] = INT2NUM(matches[i].length);
+
+      match = rb_class_new_instance(3, args, match_class);
+      rb_ary_push(list, match);
+    }
+
+    free(matches);
+
+    return list;
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -63,6 +143,8 @@ extern "C" {
 
     rb_define_singleton_method(c, "hamming_distance", (VALUE(*)(ANYARGS))hamming_distance, 2);
     rb_define_singleton_method(c, "image_hash_for", (VALUE(*)(ANYARGS))image_hash_for, 1);
+    rb_define_singleton_method(c, "texthash_for", (VALUE(*)(ANYARGS))texthash_for, 1);
+    rb_define_singleton_method(c, "textmatches_for", (VALUE(*)(ANYARGS))textmatches_for, 2);
   }
 
 #ifdef HAVE_SQLITE3EXT_H
