@@ -24,6 +24,10 @@ module Phashion
       Phashion.hamming_distance(fingerprint, other.fingerprint)
     end
 
+    def mh_distance_from(other)
+      Phashion.hamming_distance2(mh_fingerprint, other.mh_fingerprint)
+    end
+
     def duplicate?(other, opts={})
       threshold = opts[:threshold] || DEFAULT_DUPE_THRESHOLD
 
@@ -33,6 +37,14 @@ module Phashion
     def fingerprint
       @hash ||= Phashion.image_hash_for(@filename)
     end
+
+    def mh_fingerprint
+      @mh_hash ||= Phashion.mh_hash_for(@filename)
+    end
+  end
+
+  def self.mh_hash_for(filename, alpha = 2.0, lvl = 1.0)
+    _mh_hash_for(filename, alpha, lvl)
   end
 
   def self.so_file
