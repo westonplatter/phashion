@@ -1,6 +1,12 @@
 History
 =========
 
+1.1.0
+-----
+* Converted to Minitest (issue #35)
+* Added Phashion.distance_from method (issue #30)
+* Add Sqlite3 extension to handle distance calculations (issue #27)
+
 1.0.8
 ------
 * Renamed the pHashion tar.gz archive as "pHash-0.9.6.tar.gz" to solve/enable install from github 
