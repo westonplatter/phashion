@@ -1,12 +1,15 @@
 # -*- encoding: utf-8 -*-
-
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'phashion/version'
+  
 Gem::Specification.new do |s|
-  s.name          = %q{phashion}
-  s.version       = "1.0.8"
+  s.name          = 'phashion'
+  s.version       = Phashion::VERSION
   s.authors       = ["Mike Perham"]
   s.email         = ["mperham@gmail.com"]
-  s.description   = %q{Simple wrapper around the pHash library}
-  s.homepage      = %q{http://github.com/westonplatter/phashion}
+  s.description   = 'Simple wrapper around the pHash library'
+  s.homepage      = 'http://github.com/westonplatter/phashion'
   
   s.extensions    = ["ext/phashion_ext/extconf.rb"]
   s.files         = `git ls-files`.split("\n")
