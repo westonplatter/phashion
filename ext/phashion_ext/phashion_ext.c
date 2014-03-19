@@ -54,50 +54,6 @@ static VALUE hamming_distance(VALUE self, VALUE a, VALUE b) {
     return INT2NUM(result);
 }
 
-static VALUE hamming_distance2(VALUE self, VALUE a, VALUE b) {
-	double distance;
-	uint8_t* hashA;
-	uint8_t* hashB;
-	int lenA = RARRAY_LEN(a);
-	int lenB = RARRAY_LEN(b);
-
-	hashA = (uint8_t*)xcalloc(lenA, sizeof(uint8_t));
-	hashB = (uint8_t*)xcalloc(lenB, sizeof(uint8_t));
-
-	for(int i = 0; i < lenA; i++) {
-		hashA[i] = NUM2INT(rb_ary_entry(a, i));
-	}
-	for(int i = 0; i < lenB; i++) {
-		hashB[i] = NUM2INT(rb_ary_entry(b, i));
-	}
-
-	distance = ph_hammingdistance2(hashA, lenA, hashB, lenB);
-
-	xfree(hashA);
-	xfree(hashB);
-
-	return DBL2NUM(distance);
-}
-
-static VALUE mh_hash_for(VALUE self, VALUE filename, VALUE alpha, VALUE lvl) {
-	uint8_t* result;
-	int n;
-	VALUE array;
-	result = ph_mh_imagehash(StringValuePtr(filename),
-			n,
-			NUM2DBL(alpha),
-			NUM2DBL(lvl));
-	array = rb_ary_new2(n);
-
-	for(int i = 0; i < n; i++) {
-		rb_ary_push(array, INT2FIX(result[i]));
-	}
-
-	xfree(result);
-
-	return array;
-}
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -107,8 +63,6 @@ extern "C" {
 
     rb_define_singleton_method(c, "hamming_distance", (VALUE(*)(ANYARGS))hamming_distance, 2);
     rb_define_singleton_method(c, "image_hash_for", (VALUE(*)(ANYARGS))image_hash_for, 1);
-    rb_define_singleton_method(c, "_mh_hash_for", (VALUE(*)(ANYARGS))mh_hash_for, 3);
-    rb_define_singleton_method(c, "hamming_distance2", (VALUE(*)(ANYARGS))hamming_distance2, 2);
   }
 
 #ifdef HAVE_SQLITE3EXT_H

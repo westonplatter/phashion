@@ -35,10 +35,6 @@ module Phashion
     end
   end
 
-  def self.mh_hash_for(filename, alpha = 2.0, lvl = 1.0)
-    _mh_hash_for(filename, alpha, lvl)
-  end
-
   def self.so_file
     extname = RbConfig::CONFIG['DLEXT']
     File.join File.dirname(__FILE__), "phashion_ext.#{extname}"
