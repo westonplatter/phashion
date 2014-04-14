@@ -9,8 +9,6 @@
 require 'rbconfig'
 
 module Phashion
-  VERSION = '1.0.8'
-
   class Image
     DEFAULT_DUPE_THRESHOLD = 15
  
