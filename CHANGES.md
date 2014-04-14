@@ -1,5 +1,10 @@
 History
-=========
+=======
+
+1.1.1 
+-----
+* Added Ruby method to call into pHash's Mexican Hat Wavelet funcition (issue #37, Terence Lee / @hone)
+* Removed duplicate version reference
 
 1.1.0
 -----
@@ -9,7 +14,7 @@ History
 
 1.0.8
 ------
-* Renamed the pHashion tar.gz archive as "pHash-0.9.6.tar.gz" to solve/enable install from github 
+* Renamed the pHashion tar.gz archive as "pHash-0.9.6.tar.gz" to solve/enable install from github.
 
 1.0.7
 ------
@@ -27,29 +32,24 @@ History
  
 1.0.5
 -------
-
 * Fix CImg.h compilation problems. [#10]
 
 1.0.4
 -------
-
 * Fix pthread linking on Ubuntu 11.04
 
 1.0.3
 -------
-
 * Update pHash to version 0.9.3 and CImg 1.4.7.
 * Fix a few build issues.
 
 1.0.2
 -------
-
 * Make installation much easier by distributing and building locally all the native dependencies.
   This includes pHash 0.9.0 and CImg 1.3.4.
 
 1.0.1
 -------
-
 * Remove RubyInline, use standard Ruby extension infrastructure.
 * Update duplicate threshold constant based on wider image testing.
 * Make duplicate threshold variable so users can tune it based on their dataset.
@@ -58,5 +58,4 @@ History
 
 1.0.0
 -------
-
-Initial release.
+* Initial release.
