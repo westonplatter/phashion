@@ -59,14 +59,14 @@ class TestPhashion < Minitest::Test
 
     assert_kind_of Array, hash1
     assert_kind_of Array, hash2
-    assert_in_delta 0.100, Phashion.hamming_distance2(hash1, hash2), 0.0007
+    assert_in_delta 0.100, Phashion.hamming_distance2(hash1, hash2), 0.028
   end
 
   def test_mh_distance_from
     jpg = File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg'
     png = File.dirname(__FILE__) + '/png/Broccoli_Super_Food.png'
 
-    assert_in_delta 0.100, Phashion::Image.new(jpg).mh_distance_from(Phashion::Image.new(png)), 0.0007
+    assert_in_delta 0.100, Phashion::Image.new(jpg).mh_distance_from(Phashion::Image.new(png)), 0.028
   end
 
   def test_duplicate_detection
@@ -76,8 +76,6 @@ class TestPhashion < Minitest::Test
     assert_duplicate images[1], images[2]
     assert_duplicate images[0], images[2]
   end
-
-  
 
   def test_duplicate_detection_2
     files = %w(b32aade8c590e2d776c24f35868f0c7a588f51e1.jpeg df9cc82f5b32d7463f36620c61854fde9d939f7f.jpeg e7397898a7e395c2524978a5e64de0efabf08290.jpeg)
