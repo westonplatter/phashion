@@ -1,7 +1,28 @@
 require 'helper'
 require 'sqlite3'
+require 'tempfile'
 
 class TestPhashion < Minitest::Test
+
+  def test_text_hash
+    matches = Tempfile.open('foo') do |f|
+      100.times { |i|
+        f.write "hello world #{i}"
+      }
+      f.close
+      a = Phashion.texthash_for f.path
+      b = Phashion.texthash_for f.path
+
+      assert_operator a.length, :>, 0
+      assert_operator b.length, :>, 0
+      a.each { |hash| assert_instance_of Phashion::TextHashPoint, hash }
+      b.each { |hash| assert_instance_of Phashion::TextHashPoint, hash }
+
+      Phashion.textmatches_for(a, b)
+    end
+    assert_operator matches.length, :>, 0
+    matches.each { |match| assert_instance_of Phashion::TextMatch, match }
+  end
 
   def split(hash)
     r = hash & 0xFFFFFFFF

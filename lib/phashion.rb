@@ -9,6 +9,9 @@
 require 'rbconfig'
 
 module Phashion
+  TextHashPoint = Struct.new :hash, :index
+  TextMatch = Struct.new :first_index, :second_index, :length
+
   class Image
     DEFAULT_DUPE_THRESHOLD = 15
  
