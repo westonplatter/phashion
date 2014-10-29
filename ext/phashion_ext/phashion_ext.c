@@ -220,7 +220,7 @@ static void hamming_distance(sqlite3_context * ctx, int agc, sqlite3_value **arg
   sqlite3_result_int(ctx, result);
 }
 
-int sqlite3_phashionext_init(
+int sqlite3_extension_init(
   sqlite3 *db,
   char **pzErrMsg,
   const sqlite3_api_routines *pApi
