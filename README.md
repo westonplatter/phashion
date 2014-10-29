@@ -32,14 +32,13 @@ Please open a [GitHub issue](https://github.com/westonplatter/phashion/issues/) 
 
 ### Prerequisites
 
-- `libpng`
-- `libjpeg`
+Linux  
+- libjpeg-dev
+- libpng-dev
+
+Mac 
 - [imagemagick](http://www.imagemagick.org/)
-
-If you're on a Mac, you can use:
-
-- [Homebrew](http://brew.sh/), e.g.  `brew install libjpeg`
-- or [Macports](http://www.macports.org/), e.g.  `port install jpeg` .
+- libjpeg (Hombrew, `brew install libjpeg`; Macports, `port install jpeg`)
 
 
 #### Common Errors 
@@ -84,7 +83,7 @@ Optionally, you can set the minimum Hamming distance in the second argument, an 
 
 Currently, the maximum Hamming distance between two duplicate images is set at 15. As per [mperham's explanation](http://www.mikeperham.com/2010/05/21/detecting-duplicate-images-with-phashion/):
 
-> A “perceptual hash” is a 64-bit value based on the discrete cosine transform of the image’s frequency spectrum data. Similar images will have hashes that are close in terms of Hamming distance. That is, a binary hash value of 1000 is closer to 0000 than 0011 because it only has one bit different whereas the latter value has two bits different. The duplicate threshold defines how many bits must be different between two hashes for the two associated images to be considered different images. Our testing showed that 15 bits is a good value to start with, it detected all duplicates with a minimum of false positives.
+> A “perceptual hash”is a 64-bit value based on the discrete cosine transform of the image’s frequency spectrum data. Similar images will have hashes that are close in terms of Hamming distance. That is, a binary hash value of 1000 is closer to 0000 than 0011 because it only has one bit different whereas the latter value has two bits different. The duplicate threshold defines how many bits must be different between two hashes for the two associated images to be considered different images. Our testing showed that 15 bits is a good value to start with, it detected all duplicates with a minimum of false positives.
 
 As a reference point, here are the Hamming distances in these test comparisons using [/test/jpg/Broccoli_Super_Food.jpg](https://github.com/westonplatter/phashion/blob/master/test/jpg/Broccoli_Super_Food.jpg) as the source image:
 
@@ -120,7 +119,7 @@ Testing
 
 
 #### To run the test suite:
-
+    
     bundle
     rake compile
     rake
