@@ -1,6 +1,11 @@
 History
 =======
 
+next
+-----
+* Added TravisCI testing support (issue #49)
+* Renamed internally used Sqlite3 client function name (issue #49)
+
 1.1.1 
 -----
 * Added Ruby method to call into pHash's Mexican Hat Wavelet funcition (issue #37, Terence Lee / @hone)

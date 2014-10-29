@@ -1,5 +1,6 @@
 Phashion
 ========
+[![Build Status](https://travis-ci.org/westonplatter/phashion.svg?branch=tests-travisci)](https://travis-ci.org/westonplatter/phashion)
 
 Phashion is a Ruby wrapper around the [pHash library](http://phash.org/), "perceptual hash", which detects duplicate and near-duplicate multimedia files (e.g. images, audio, video, though Phashion currently only supports images.). "Near-duplicates" are images that come from the same source and show essentially the same thing, but may have differences in such features as dimensions, bytesizes, lossy-compression artifacts, and color levels.
 
@@ -32,24 +33,19 @@ Please open a [GitHub issue](https://github.com/westonplatter/phashion/issues/) 
 
 ### Prerequisites
 
-- `libpng`
-- `libjpeg`
+Linux  
+- libjpeg-dev
+- libpng-dev
+
+Mac 
 - [imagemagick](http://www.imagemagick.org/)
-
-If you're on a Mac, you can use:
-
-- [Homebrew](http://brew.sh/), e.g.  `brew install libjpeg`
-- or [Macports](http://www.macports.org/), e.g.  `port install jpeg` .
+- libjpeg (Hombrew, `brew install libjpeg`; Macports, `port install jpeg`)
 
 
 #### Common Errors 
-
-
-
-- `ld: library not found for -ljpeg` &ndash; You need to install `libjpeg` if you run into this error upon `gem install`:
-
-
-- `.....sh: convert: command not found; sh: gm: command not found` &ndash; You need to install [imagemagick](http://www.imagemagick.org/).
+- `ld: library not found for -ljpeg` &ndash; Did you install `libjpeg`?
+- `... sh: convert: command not found; sh: gm: command not found` &ndash; Did you install [imagemagick](http://www.imagemagick.org/)?
+- `... checking for sqlite3ext.h... *** extconf.rb failed *** ...` &ndash; Did you install `libpng-dev` and/or `libjpeg-dev`?
 
 
 Usage
@@ -84,7 +80,7 @@ Optionally, you can set the minimum Hamming distance in the second argument, an 
 
 Currently, the maximum Hamming distance between two duplicate images is set at 15. As per [mperham's explanation](http://www.mikeperham.com/2010/05/21/detecting-duplicate-images-with-phashion/):
 
-> A “perceptual hash” is a 64-bit value based on the discrete cosine transform of the image’s frequency spectrum data. Similar images will have hashes that are close in terms of Hamming distance. That is, a binary hash value of 1000 is closer to 0000 than 0011 because it only has one bit different whereas the latter value has two bits different. The duplicate threshold defines how many bits must be different between two hashes for the two associated images to be considered different images. Our testing showed that 15 bits is a good value to start with, it detected all duplicates with a minimum of false positives.
+> A “perceptual hash”is a 64-bit value based on the discrete cosine transform of the image’s frequency spectrum data. Similar images will have hashes that are close in terms of Hamming distance. That is, a binary hash value of 1000 is closer to 0000 than 0011 because it only has one bit different whereas the latter value has two bits different. The duplicate threshold defines how many bits must be different between two hashes for the two associated images to be considered different images. Our testing showed that 15 bits is a good value to start with, it detected all duplicates with a minimum of false positives.
 
 As a reference point, here are the Hamming distances in these test comparisons using [/test/jpg/Broccoli_Super_Food.jpg](https://github.com/westonplatter/phashion/blob/master/test/jpg/Broccoli_Super_Food.jpg) as the source image:
 
@@ -118,12 +114,12 @@ detection of alpha PNG file types.
 Testing
 -------
 
-
 #### To run the test suite:
-
-    bundle
-    rake compile
-    rake
+    
+    $ cd phashion
+    $ bundle install 
+    $ rake compile
+    $ rake test
 
 
 Author
