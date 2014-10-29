@@ -1,0 +1,12 @@
+language: ruby
+
+rvm: 
+  - 2.1.4
+
+brefore_install: 
+  - sudo apt-get update
+  - sudo apt-get install libpng-dev libjpeg-dev
+
+script: 
+  - bundle exec rake compile
+  - bundle exec rake test
