@@ -1,5 +1,6 @@
 Phashion
 ========
+[![Build Status](https://travis-ci.org/westonplatter/phashion.svg?branch=tests-travisci)](https://travis-ci.org/westonplatter/phashion)
 
 Phashion is a Ruby wrapper around the [pHash library](http://phash.org/), "perceptual hash", which detects duplicate and near-duplicate multimedia files (e.g. images, audio, video, though Phashion currently only supports images.). "Near-duplicates" are images that come from the same source and show essentially the same thing, but may have differences in such features as dimensions, bytesizes, lossy-compression artifacts, and color levels.
 
