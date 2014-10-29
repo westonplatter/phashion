@@ -42,13 +42,9 @@ Mac
 
 
 #### Common Errors 
-
-
-
-- `ld: library not found for -ljpeg` &ndash; You need to install `libjpeg` if you run into this error upon `gem install`:
-
-
-- `.....sh: convert: command not found; sh: gm: command not found` &ndash; You need to install [imagemagick](http://www.imagemagick.org/).
+- `ld: library not found for -ljpeg` &ndash; Did you install `libjpeg`?
+- `... sh: convert: command not found; sh: gm: command not found` &ndash; Did you install [imagemagick](http://www.imagemagick.org/)?
+- `... checking for sqlite3ext.h... *** extconf.rb failed *** ...` &ndash; Did you install `libpng-dev` and/or `libjpeg-dev`?
 
 
 Usage
@@ -117,12 +113,12 @@ detection of alpha PNG file types.
 Testing
 -------
 
-
 #### To run the test suite:
     
-    bundle
-    rake compile
-    rake
+    $ cd phashion
+    $ bundle install 
+    $ rake compile
+    $ rake test
 
 
 Author
