@@ -122,19 +122,19 @@ class TestPhashion < Minitest::Test
     assert_duplicate gif, png
     assert_duplicate jpg, gif
   end
-  
+
   def test_fingerprint_png_is_different
     png1 = Phashion::Image.new(File.dirname(__FILE__) + '/png/Broccoli_Super_Food.png')
     png2 = Phashion::Image.new(File.dirname(__FILE__) + '/png/linux.png')
     png3 = Phashion::Image.new(File.dirname(__FILE__) + '/png/grass.png')
     png4 = Phashion::Image.new(File.dirname(__FILE__) + '/png/Broccoli_Super_Food.png')
-    
+
     fingerprints = []
     fingerprints << png1.fingerprint
     fingerprints << png2.fingerprint
     fingerprints << png3.fingerprint
     fingerprints << png4.fingerprint
-    
+
     assert fingerprints.uniq.size == 3, "array should contain 3 unique fingerprints"
   end
 
@@ -145,8 +145,8 @@ class TestPhashion < Minitest::Test
     jpg = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg')
     jpg_x = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.100px.jpg')
 
-    refute(jpg.duplicate?(jpg_x, threshold: 1))    
-    assert(jpg.duplicate?(jpg_x, threshold: 2)) 
+    refute(jpg.duplicate?(jpg_x, threshold: 1))
+    assert(jpg.duplicate?(jpg_x, threshold: 2))
   end
 
 
@@ -161,28 +161,28 @@ class TestPhashion < Minitest::Test
   def test_distance_from_lossy_jpg
     jpg = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg')
     jpg_x = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.lossy.jpg')
-  
+
     assert_equal(jpg.distance_from(jpg_x), 0)
   end
 
   def test_distance_from_smaller_jpg
     jpg = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg')
     jpg_x = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.100px.jpg')
-  
+
     assert_equal(jpg.distance_from(jpg_x), 2)
   end
 
   def test_distance_from_color_correction
     jpg = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg')
     jpg_x = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.color-corrected.jpg')
-  
+
     assert_equal(jpg.distance_from(jpg_x), 2)
   end
 
   def test_distance_from_black_and_white
     jpg = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg')
     jpg_x = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.bw.jpg')
-  
+
     assert_equal(jpg.distance_from(jpg_x), 2)
   end
 
@@ -191,14 +191,14 @@ class TestPhashion < Minitest::Test
     # from 500x349 to 466x312
     jpg = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg')
     jpg_x = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.bounding-box.jpg')
-  
+
     assert_equal(jpg.distance_from(jpg_x), 12)
   end
-  
+
   def test_distance_from_rotation_of_5degrees_c2
     jpg = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg')
     jpg_x = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.rotate5cw.jpg')
-  
+
     assert_equal(jpg.distance_from(jpg_x), 14)
   end
 
@@ -206,12 +206,18 @@ class TestPhashion < Minitest::Test
   def test_distance_from_horizontal_flip
     jpg = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg')
     jpg_x = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.horizontal-flip.jpg')
-  
-    assert_operator(jpg.distance_from(jpg_x), :>, Phashion::Image::DEFAULT_DUPE_THRESHOLD)
+
+    assert_operator(jpg.distance_from(jpg_x), :>, Phashion::DEFAULT_DUPE_THRESHOLD)
+  end
+
+  def test_duplicate_with_module_method
+    jpg = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg')
+    jpg_x = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.bw.jpg')
+
+    assert_duplicate_with_module_method(jpg, jpg_x)
   end
 
   private
-
 
   def assert_duplicate(a, b)
     assert a.duplicate?(b), "#{a.filename} not dupe of #{b.filename}"
@@ -219,5 +225,9 @@ class TestPhashion < Minitest::Test
 
   def assert_not_duplicate(a, b)
     assert !a.duplicate?(b), "#{a.filename} dupe of #{b.filename}"
-  end  
+  end
+
+  def assert_duplicate_with_module_method(a, b)
+    assert Phashion.duplicate?(a.fingerprint, b.fingerprint), "#{a.filename} not dupe of #{b.filename}"
+  end
 end

@@ -12,9 +12,9 @@ module Phashion
   TextHashPoint = Struct.new :hash, :index
   TextMatch = Struct.new :first_index, :second_index, :length
 
+  DEFAULT_DUPE_THRESHOLD = 15
+
   class Image
-    DEFAULT_DUPE_THRESHOLD = 15
- 
     attr_reader :filename
     def initialize(filename)
       @filename = filename
@@ -51,6 +51,12 @@ module Phashion
   def self.so_file
     extname = RbConfig::CONFIG['DLEXT']
     File.join File.dirname(__FILE__), "phashion_ext.#{extname}"
+  end
+
+  def self.duplicate?(fingerprint1, fingerprint2, opts={})
+    threshold = opts[:threshold] || DEFAULT_DUPE_THRESHOLD
+
+    Phashion.hamming_distance(fingerprint1, fingerprint2) <= threshold
   end
 end
 
