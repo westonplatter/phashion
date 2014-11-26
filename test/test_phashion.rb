@@ -210,6 +210,11 @@ class TestPhashion < Minitest::Test
     assert_operator(jpg.distance_from(jpg_x), :>, Phashion::Image::DEFAULT_DUPE_THRESHOLD)
   end
 
+  def test_remote_image
+    remote_image = Phashion::Image.new('http://www.wakanda.org/sites/default/files/blog/blog-github.png')
+    assert_kind_of Phashion::Image, remote_image
+  end
+
   private
 
 
@@ -219,5 +224,5 @@ class TestPhashion < Minitest::Test
 
   def assert_not_duplicate(a, b)
     assert !a.duplicate?(b), "#{a.filename} dupe of #{b.filename}"
-  end  
+  end
 end
