@@ -67,6 +67,11 @@ Optionally, you can set the minimum Hamming distance in the second argument, an 
     img1.duplicate?(img2, :threshold => 0) 
     --> false
 
+### For use with remote files is very simple
+    require 'phashion'
+    path = 'http://www.wakanda.org/sites/default/files/blog/blog-github.png'
+    Phashion::Image.new(path)
+
 
 ### Finding the Hamming distance between two images
 
@@ -85,7 +90,7 @@ Currently, the maximum Hamming distance between two duplicate images is set at 1
 As a reference point, here are the Hamming distances in these test comparisons using [/test/jpg/Broccoli_Super_Food.jpg](https://github.com/westonplatter/phashion/blob/master/test/jpg/Broccoli_Super_Food.jpg) as the source image:
 
 
-| Variation                                            | Hamming distance  
+| Variation                                            | Hamming distance
 | ---------------------------------------------------- | ----------------: 
 | JPG to PNG                                           | 0
 | Lossy JPG (Photoshop Save for Web quality = 20)      | 0                 

@@ -7,6 +7,8 @@
 # int ph_hamming_distance(ulong64 hasha, ulong64 hashb);
 
 require 'rbconfig'
+require 'open-uri'
+require File.dirname(__FILE__) + '/utils'
 
 module Phashion
   TextHashPoint = Struct.new :hash, :index
@@ -17,7 +19,7 @@ module Phashion
  
     attr_reader :filename
     def initialize(filename)
-      @filename = filename
+      @filename = (Utils.is_remote?(filename))? open(filename).path : filename ;
     end
 
     # returns: an Integer representing the hamming distance from :other
@@ -52,6 +54,9 @@ module Phashion
     extname = RbConfig::CONFIG['DLEXT']
     File.join File.dirname(__FILE__), "phashion_ext.#{extname}"
   end
+
+
+
 end
 
 require 'phashion_ext'

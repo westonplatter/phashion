@@ -29,3 +29,6 @@ ext/phashion_ext
 !ext/phashion_ext/phashion_ext.c
 !ext/phashion_ext/pHash-0.9.6.tar.gz
 lib/phashion_ext.bundle
+
+## Rubymine Files
+.idea/
