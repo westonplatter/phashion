@@ -1,13 +1,17 @@
 History
 =======
 
+1.2.1
+-----
+* Add dupe check passing two fingerprints (issue #50)
+
 1.2.0
 -----
 * Added TravisCI testing support (issue #49)
 * Renamed `sqlite_phashion_init` to `sqlite_extension_init` to fixing failing tests (issue #49).
   See https://github.com/westonplatter/phashion/commit/f821b5f6bb40f438a1ab3f6fcc6f7730366468ae
 
-1.1.1 
+1.1.1
 -----
 * Added Ruby method to call into pHash's Mexican Hat Wavelet funcition (issue #37, Terence Lee / @hone)
 * Removed duplicate version reference
@@ -35,7 +39,7 @@ History
 * Update pHash to version 0.9.6
 * PNG support added
 * Requiring rdoc tasks fixed
- 
+
 1.0.5
 -------
 * Fix CImg.h compilation problems. [#10]
