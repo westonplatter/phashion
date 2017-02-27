@@ -157,7 +157,7 @@ class TestPhashion < Minitest::Test
 
     refute(jpg.dupe_at_threshold_1?(jpg_x))
     assert(jpg.dupe_at_threshold_2?(jpg_x))
-    assert_raises NoMethodError { jpg.dupe_at_threshold_100?(jpg_x) }
+    assert_raises(NoMethodError) { jpg.dupe_at_threshold_100?(jpg_x) }
   end
 
 
