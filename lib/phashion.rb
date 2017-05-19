@@ -35,6 +35,10 @@ module Phashion
       distance_from(other) <= threshold
     end
 
+    (0..64).each do |n|
+      define_method("dupe_at_threshold_#{n}?") { |oth| distance_from(oth) <= n }
+    end
+
     def fingerprint
       @hash ||= Phashion.image_hash_for(@filename)
     end
