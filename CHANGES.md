@@ -1,7 +1,7 @@
 History
 =======
 
-1.2.1
+Master Branch
 -----
 * Add dupe check passing two fingerprints (issue #50)
 
