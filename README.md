@@ -15,16 +15,16 @@ You install it just like any other Ruby gem:
     gem install phashion
 
 Phashion is somewhat involved to install as it has a few dependencies. Phashion
-wrapps these dependencies into a custom tarball that is built locally just 
-for this gem so you don't have to do anything special. Look in the 
+wrapps these dependencies into a custom tarball that is built locally just
+for this gem so you don't have to do anything special. Look in the
 `ext/phashion_ext` folder for more details.
 
 
-### Compatibility 
-Because of this complexity, it is possible the gem install will fail on your 
+### Compatibility
+Because of this complexity, it is possible the gem install will fail on your
 platform. Phashion has been tested on:
 
-* Mac OSX 10.6 
+* Mac OSX 10.6
 * Mac OSX 10.9
 * Ubuntu 8.04
 * Ubuntu 12.04
@@ -37,12 +37,13 @@ Linux
 - libjpeg-dev
 - libpng-dev
 
-Mac 
+Mac
 - [imagemagick](http://www.imagemagick.org/)
 - libjpeg (Hombrew, `brew install libjpeg`; Macports, `port install jpeg`)
+- libpng (Hombrew, `brew install libpng`; Macports, `port install libpng`)
 
 
-#### Common Errors 
+#### Common Errors
 - `ld: library not found for -ljpeg` &ndash; Did you install `libjpeg`?
 - `... sh: convert: command not found; sh: gm: command not found` &ndash; Did you install [imagemagick](http://www.imagemagick.org/)?
 - `... checking for sqlite3ext.h... *** extconf.rb failed *** ...` &ndash; Did you install `libpng-dev` and/or `libjpeg-dev`?
@@ -64,7 +65,7 @@ Optionally, you can set the minimum Hamming distance in the second argument, an 
     img1.duplicate?(img2, :threshold => 5)
     --> true
 
-    img1.duplicate?(img2, :threshold => 0) 
+    img1.duplicate?(img2, :threshold => 0)
     --> false
 
 
@@ -86,7 +87,7 @@ As a reference point, here are the Hamming distances in these test comparisons u
 
 
 | Variation                                            | Hamming distance  
-| ---------------------------------------------------- | ----------------: 
+| ---------------------------------------------------- | ----------------:
 | JPG to PNG                                           | 0
 | Lossy JPG (Photoshop Save for Web quality = 20)      | 0                 
 | Thumbnail (from 500px to 100px)                      | 2
@@ -103,11 +104,11 @@ As a reference point, here are the Hamming distances in these test comparisons u
 Gem uses customized pHash 0.9.6
 -------------------------------
 
-In order to detech duplicate alpha PNGs, the gem uses a custom version of pHash 
-0.9.6. The customization is limited to only these changes, 
+In order to detech duplicate alpha PNGs, the gem uses a custom version of pHash
+0.9.6. The customization is limited to only these changes,
 [westonplatter/phash@ff255d2]
-(https://github.com/westonplatter/phash/commit/ff255d2d3f93c841b98923ecbde997027f21ae36). 
-The gem will be moving back to the pHash master branch once it supports 
+(https://github.com/westonplatter/phash/commit/ff255d2d3f93c841b98923ecbde997027f21ae36).
+The gem will be moving back to the pHash master branch once it supports
 detection of alpha PNG file types.
 
 
@@ -115,9 +116,9 @@ Testing
 -------
 
 #### To run the test suite:
-    
+
     $ cd phashion
-    $ bundle install 
+    $ bundle install
     $ rake compile
     $ rake test
 
@@ -125,9 +126,9 @@ Testing
 Author
 ======
 
-Mike Perham, 
-http://mikeperham.com, 
-http://twitter.com/mperham, 
+Mike Perham,
+http://mikeperham.com,
+http://twitter.com/mperham,
 mperham AT gmail.com
 
 Copyright
