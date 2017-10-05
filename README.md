@@ -58,15 +58,15 @@ require 'phashion'
 img1 = Phashion::Image.new(filename1)
 img2 = Phashion::Image.new(filename2)
 img1.duplicate?(img2)
-# true
+# --> true
 ```
 Optionally, you can set the minimum Hamming distance in the second argument, an options Hash:
 ```ruby
 img1.duplicate?(img2, :threshold => 5)
-# true
+# --> true
 
-img1.duplicate?(img2, :threshold => 0)
-# false
+img1.duplicate?(img2, :threshold => 0)  
+# --> false
 ```
 
 ### Finding the Hamming distance between two images
@@ -75,8 +75,8 @@ img1.duplicate?(img2, :threshold => 0)
 require 'phashion'
 img1 = Phashion::Image.new(filename1)
 img2 = Phashion::Image.new(filename2)
-img1.distance_from(img2)
-# 6
+img1.distance_from(img2)  
+# --> 6
 ```
 
 ### Threshold for dupe-detection
