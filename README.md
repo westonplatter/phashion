@@ -4,8 +4,7 @@ Phashion
 
 Phashion is a Ruby wrapper around the [pHash library](http://phash.org/), "perceptual hash", which detects duplicate and near-duplicate multimedia files (e.g. images, audio, video, though Phashion currently only supports images.). "Near-duplicates" are images that come from the same source and show essentially the same thing, but may have differences in such features as dimensions, bytesizes, lossy-compression artifacts, and color levels.
 
-[See an overview of Phashion on Mike's blog]
-(http://www.mikeperham.com/2010/05/21/detecting-duplicate-images-with-phashion/).
+[See an overview of Phashion on Mike's blog](http://www.mikeperham.com/2010/05/21/detecting-duplicate-images-with-phashion/).
 
 Installation
 ------------
@@ -15,7 +14,7 @@ You install it just like any other Ruby gem:
     gem install phashion
 
 Phashion is somewhat involved to install as it has a few dependencies. Phashion
-wrapps these dependencies into a custom tarball that is built locally just
+wraps these dependencies into a custom tarball that is built locally just
 for this gem so you don't have to do anything special. Look in the
 `ext/phashion_ext` folder for more details.
 
@@ -54,28 +53,31 @@ Usage
 
 ### Testing if one image is a duplicate of another
 
-    require 'phashion'
-    img1 = Phashion::Image.new(filename1)
-    img2 = Phashion::Image.new(filename2)
-    img1.duplicate?(img2)
-    --> true
-
+```ruby
+require 'phashion'
+img1 = Phashion::Image.new(filename1)
+img2 = Phashion::Image.new(filename2)
+img1.duplicate?(img2)
+# --> true
+```
 Optionally, you can set the minimum Hamming distance in the second argument, an options Hash:
+```ruby
+img1.duplicate?(img2, :threshold => 5)
+# --> true
 
-    img1.duplicate?(img2, :threshold => 5)
-    --> true
-
-    img1.duplicate?(img2, :threshold => 0)
-    --> false
-
+img1.duplicate?(img2, :threshold => 0)  
+# --> false
+```
 
 ### Finding the Hamming distance between two images
 
-    require 'phashion'
-    img1 = Phashion::Image.new(filename1)
-    img2 = Phashion::Image.new(filename2)
-    img1.distance_from(img2)
-    --> 6
+```ruby
+require 'phashion'
+img1 = Phashion::Image.new(filename1)
+img2 = Phashion::Image.new(filename2)
+img1.distance_from(img2)  
+# --> 6
+```
 
 ### Threshold for dupe-detection
 
@@ -106,8 +108,7 @@ Gem uses customized pHash 0.9.6
 
 In order to detech duplicate alpha PNGs, the gem uses a custom version of pHash
 0.9.6. The customization is limited to only these changes,
-[westonplatter/phash@ff255d2]
-(https://github.com/westonplatter/phash/commit/ff255d2d3f93c841b98923ecbde997027f21ae36).
+[westonplatter/phash@ff255d2](https://github.com/westonplatter/phash/commit/ff255d2d3f93c841b98923ecbde997027f21ae36).
 The gem will be moving back to the pHash master branch once it supports
 detection of alpha PNG file types.
 
