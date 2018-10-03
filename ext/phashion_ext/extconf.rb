@@ -9,7 +9,7 @@ $libraries = " -L#{HERE}/lib -L/usr/local/lib"
 $LIBPATH = ["#{HERE}/lib"]
 $CFLAGS = "#{$includes} #{$libraries} #{$CFLAGS}"
 $LDFLAGS = "#{$libraries} #{$LDFLAGS}"
-$CXXFLAGS = ' -pthread'  
+$CXXFLAGS = ' -fPIC -pthread -march=native'
 
 Dir.chdir(HERE) do
   if File.exist?("lib")
@@ -20,7 +20,7 @@ Dir.chdir(HERE) do
     raise "'#{cmd}' failed" unless system(cmd)
 
     Dir.chdir(BUNDLE_PATH) do
-      puts(cmd = "env CXXFLAGS='#{$CXXFLAGS}' CFLAGS='#{$CFLAGS}' LDFLAGS='#{$LDFLAGS}' ./configure --prefix=#{HERE} --disable-audio-hash --disable-video-hash --disable-shared --with-pic 2>&1")
+      puts(cmd = "env CXXFLAGS='#{$CXXFLAGS}' CFLAGS='#{$CFLAGS}' LDFLAGS='#{$LDFLAGS}' ./configure --prefix=#{HERE} --disable-audio-hash --disable-video-hash --disable-shared 2>&1")
       raise "'#{cmd}' failed" unless system(cmd)
 
       puts(cmd = "make || true 2>&1")
@@ -40,7 +40,7 @@ Dir.chdir(HERE) do
     system("cp -f libpHash.a libpHash_gem.a")
     system("cp -f libpHash.la libpHash_gem.la")
   end
-  $LIBS = " -lpthread -lpHash_gem -lstdc++ -ljpeg -lpng"
+  $LIBS = " -lpthread -lmvec -lpHash_gem -lstdc++ -ljpeg -lpng"
 end
 
 have_header 'sqlite3ext.h'
