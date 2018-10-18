@@ -9,7 +9,7 @@ $libraries = " -L#{HERE}/lib -L/usr/local/lib"
 $LIBPATH = ["#{HERE}/lib"]
 $CFLAGS = "#{$includes} #{$libraries} #{$CFLAGS}"
 $LDFLAGS = "#{$libraries} #{$LDFLAGS}"
-$CXXFLAGS = ' -fPIC -pthread -march=native'
+$CXXFLAGS = ' -fPIC -pthread'
 
 Dir.chdir(HERE) do
   if File.exist?("lib")
