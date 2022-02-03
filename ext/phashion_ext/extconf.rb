@@ -8,8 +8,10 @@ $includes = " -I#{HERE}/include"
 $libraries = " -L#{HERE}/lib -L/usr/local/lib"
 $LIBPATH = ["#{HERE}/lib"]
 $CFLAGS = "#{$includes} #{$libraries} #{$CFLAGS}"
+$CFLAGS += " -fdeclspec -L/opt/homebrew/lib" if RUBY_PLATFORM =~ /arm64-darwin/
 $LDFLAGS = "#{$libraries} #{$LDFLAGS}"
-$CXXFLAGS = ' -pthread'  
+$LDFLAGS += " -L/opt/homebrew/opt/libpng/lib -L/opt/homebrew/opt/libjpeg/lib " if RUBY_PLATFORM =~ /arm64-darwin/
+$CXXFLAGS = ' -pthread'
 
 Dir.chdir(HERE) do
   if File.exist?("lib")
