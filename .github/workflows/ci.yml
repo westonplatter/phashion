@@ -1,0 +1,26 @@
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: [3.1, 3.0, 2.7, 2.6, 2.5]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby ${{ matrix.ruby-version }}
+        uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+      - name: Install xmllint
+        run: sudo apt-get install -y libpng-dev libjpeg-dev
+      - name: Install dependencies
+        run: bundle install
+      - name: Compile
+        run: bundle exec rake compile
+      - name: Run tests
+        run: bundle exec rake
