@@ -16,8 +16,11 @@ module Phashion
 
   class Image
     attr_reader :filename
-    def initialize(filename)
+
+    def initialize(filename, my_hash=nil, my_mh_hash=nil)
       @filename = filename
+      @hash     = my_hash
+      @mh_hash  = my_mh_hash
     end
 
     # returns: an Integer representing the hamming distance from :other
