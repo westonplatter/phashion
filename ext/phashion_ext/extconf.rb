@@ -4,6 +4,7 @@ HERE = File.expand_path(File.dirname(__FILE__))
 BUNDLE = Dir.glob("#{HERE}/pHash-*.tar.gz").first
 BUNDLE_PATH = BUNDLE.gsub(".tar.gz", "")
 $CFLAGS = " -x c++ #{ENV["CFLAGS"]}"
+$CFLAGS += " -fdeclspec" if RUBY_PLATFORM =~ /darwin/
 $includes = " -I#{HERE}/include"
 $libraries = " -L#{HERE}/lib -L/usr/local/lib"
 $LIBPATH = ["#{HERE}/lib"]
