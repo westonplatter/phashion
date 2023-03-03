@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [ master, feature/add_ruby_3_1 ]
+    branches: [ master ]
   pull_request:
     branches: [ '*' ]
 
