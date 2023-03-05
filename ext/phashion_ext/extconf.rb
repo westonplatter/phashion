@@ -4,6 +4,7 @@ HERE = File.expand_path(File.dirname(__FILE__))
 BUNDLE = Dir.glob("#{HERE}/pHash-*.tar.gz").first
 BUNDLE_PATH = BUNDLE.gsub(".tar.gz", "")
 $CFLAGS = " -x c++ #{ENV["CFLAGS"]}"
+$CFLAGS += " -fdeclspec" if RUBY_PLATFORM =~ /darwin/
 $includes = " -I#{HERE}/include"
 $libraries = " -L#{HERE}/lib -L/usr/local/lib"
 $LIBPATH = ["#{HERE}/lib"]
@@ -40,7 +41,7 @@ Dir.chdir(HERE) do
     system("cp -f libpHash.a libpHash_gem.a")
     system("cp -f libpHash.la libpHash_gem.la")
   end
-  $LIBS = " -lpthread -lpHash_gem -lstdc++ -ljpeg -lpng"
+  $LIBS = " -lpthread -lpHash_gem -lstdc++ -ljpeg -lpng -lm"
 end
 
 have_header 'sqlite3ext.h'
