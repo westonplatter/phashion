@@ -149,7 +149,7 @@ class TestPhashion < Minitest::Test
     assert(jpg.duplicate?(jpg_x, threshold: 2))
   end
 
-   def test_duplicate_meta_methods
+  def test_duplicate_meta_methods
     # note: this test depends on the smaller_jpg test still asserting a distance of 2
     # note-2: threshold is a :less-than-or-equal-to comparison, which is a change from version 1.0.8
     jpg = Phashion::Image.new(File.dirname(__FILE__) + '/jpg/Broccoli_Super_Food.jpg')
