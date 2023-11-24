@@ -1398,7 +1398,7 @@ EOF
 	GUESS=$UNAME_MACHINE-apple-rhapsody$UNAME_RELEASE
 	;;
     arm64:Darwin:*:*)
-	GUESS=arm64
+	GUESS=arm64-apple-darwin$UNAME_RELEASE
 	;;
     *:Darwin:*:*)
 	UNAME_PROCESSOR=`uname -p`
