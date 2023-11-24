@@ -10,7 +10,7 @@ $libraries = " -L#{HERE}/lib -L/usr/local/lib"
 $LIBPATH = ["#{HERE}/lib"]
 $CFLAGS = "#{$includes} #{$libraries} #{$CFLAGS}"
 $LDFLAGS = "#{$libraries} #{$LDFLAGS}"
-$CXXFLAGS = ' -pthread'  
+$CXXFLAGS = ' -pthread'
 
 Dir.chdir(HERE) do
   if File.exist?("lib")
@@ -18,6 +18,9 @@ Dir.chdir(HERE) do
   else
 
     puts(cmd = "tar xzf #{BUNDLE} 2>&1")
+    raise "'#{cmd}' failed" unless system(cmd)
+
+    puts(cmd = "cp config.sub #{BUNDLE_PATH}")
     raise "'#{cmd}' failed" unless system(cmd)
 
     puts(cmd = "cp config.guess #{BUNDLE_PATH}")
