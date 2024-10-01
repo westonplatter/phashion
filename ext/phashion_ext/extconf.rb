@@ -1,4 +1,5 @@
 require 'mkmf'
+require 'fileutils'
 
 HERE = File.expand_path(File.dirname(__FILE__))
 BUNDLE = Dir.glob("#{HERE}/pHash-*.tar.gz").first
@@ -19,6 +20,9 @@ Dir.chdir(HERE) do
 
     puts(cmd = "tar xzf #{BUNDLE} 2>&1")
     raise "'#{cmd}' failed" unless system(cmd)
+
+    FileUtils.cp "#{HERE}/config.guess", "#{BUNDLE_PATH}/config.guess"
+    FileUtils.cp "#{HERE}/config.sub", "#{BUNDLE_PATH}/config.sub"
 
     Dir.chdir(BUNDLE_PATH) do
       puts(cmd = "env CXXFLAGS='#{$CXXFLAGS}' CFLAGS='#{$CFLAGS}' LDFLAGS='#{$LDFLAGS}' ./configure --prefix=#{HERE} --disable-audio-hash --disable-video-hash --disable-shared --with-pic 2>&1")
