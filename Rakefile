@@ -1,7 +1,11 @@
 require 'rubygems'
 require 'rake'
-
+require 'bundler'
 require 'rake/testtask'
+require "rake/extensiontask"
+
+SPEC = Bundler.load_gemspec("phashion.gemspec")
+
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
   test.pattern = 'test/**/test_*.rb'
@@ -33,8 +37,14 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
+Gem::PackageTask.new(SPEC) do |pkg|
+end
 
-gem 'rake-compiler', '>= 0.7.0'
-require "rake/extensiontask"
-
-Rake::ExtensionTask.new("phashion_ext")
+Rake::ExtensionTask.new("phashion_ext", SPEC) do |ext|
+  ext.lib_dir = "lib/phashion_ext"
+  ext.cross_compile = true
+  ext.cross_platform = %w(arm64-darwin x86_64-linux x86_64-darwin)
+  ext.cross_config_options << {
+    "arm64-darwin" => "--with-opt-dir=/opt/homebrew/opt/openssl",
+  }
+end
