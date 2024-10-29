@@ -4,12 +4,19 @@ HERE = File.expand_path(File.dirname(__FILE__))
 BUNDLE = Dir.glob("#{HERE}/pHash-*.tar.gz").first
 BUNDLE_PATH = BUNDLE.gsub(".tar.gz", "")
 $CFLAGS = " -x c++ -fPIC #{ENV["CFLAGS"]}"
+$CFLAGS += " -fdeclspec" if RUBY_PLATFORM =~ /darwin/
 $includes = " -I#{HERE}/include"
 $libraries = " -L#{HERE}/lib -L/usr/local/lib"
 $LIBPATH = ["#{HERE}/lib"]
 $CFLAGS = "#{$includes} #{$libraries} #{$CFLAGS}"
 $LDFLAGS = "#{$libraries} #{$LDFLAGS}"
 $CXXFLAGS = ' -fPIC -pthread'
+
+if RUBY_PLATFORM =~ /darwin/
+  brew_prefix = `brew --prefix`.chomp
+  $LIBPATH << "#{brew_prefix}/lib"
+  puts $LIBPATH
+end
 
 Dir.chdir(HERE) do
   if File.exist?("lib")

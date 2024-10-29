@@ -1,0 +1,57 @@
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  test_and_build:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os:
+          - 'ubuntu-latest'
+          - 'macos-14'
+        include:
+          - os: ubuntu-latest
+            arch: 'x86_64-linux'
+          - os: macos-14
+            arch: 'arm64-darwin-23'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby 3.1
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+      - name: Print system info
+        run: uname -r
+      - name: Print ruby platform
+        run: ruby -e 'puts RUBY_PLATFORM'
+      - name: Print rubygems env
+        run: gem env
+      - name: Install dev dependencies (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get install -y libpng-dev libjpeg-dev libsqlite3-dev
+      - name: Install dev dependencies (macOS)
+        if: startsWith(matrix.os, 'macos-')
+        run: brew install libpng jpeg sqlite3 imagemagick
+      - name: Install dependencies
+        run: bundle install
+      - name: Compile
+        run: bundle exec rake compile
+      - name: Run tests
+        run: bundle exec rake
+      - name: Build native gem (rake-compiler)
+        run: bundle exec rake native gem
+      - name: Build native gem (gem build)
+        if: startsWith(matrix.arch, 'arm64-darwin')
+        run: gem build pkg/phashion-*-arm64-darwin-*/*.gemspec -o pkg/arm64-darwin.gem --platform arm64-darwin
+      - name: Step
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.arch }}-${{ env.SHORT_SHA }}
+          overwrite: true
+          path: |
+            pkg/*.gem

@@ -1,7 +1,11 @@
 require 'rubygems'
 require 'rake'
-
+require 'bundler'
 require 'rake/testtask'
+require "rake/extensiontask"
+
+SPEC = Bundler.load_gemspec("phashion.gemspec")
+
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
   test.pattern = 'test/**/test_*.rb'
@@ -33,8 +37,10 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
+Gem::PackageTask.new(SPEC) do |pkg|
+end
 
-gem 'rake-compiler', '>= 0.7.0'
-require "rake/extensiontask"
-
-Rake::ExtensionTask.new("phashion_ext")
+Rake::ExtensionTask.new("phashion_ext", SPEC) do |ext|
+  RUBY_PLATFORM =~ /darwin/ &&
+    ext.config_options << "--with-sqlite3ext-dir=#{`brew --prefix sqlite`.chomp}"
+end
