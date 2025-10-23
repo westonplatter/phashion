@@ -41,8 +41,15 @@ Dir.chdir(HERE) do
     system("cp -f libpHash.a libpHash_gem.a")
     system("cp -f libpHash.la libpHash_gem.la")
   end
-  $LIBS = " -lpthread -lpHash_gem -lstdc++ -ljpeg -lpng -lm"
+
 end
+
+$CFLAGS += " #{(Array pkg_config "libjpeg").join " "}"
+raise "missing jpeglib.h" unless have_header("jpeglib.h")
+$CFLAGS += " #{(Array pkg_config "libpng").join " "}"
+raise "missing png.h" unless have_header("png.h")
+
+$LIBS = " -lpthread -lpHash_gem -lstdc++ -ljpeg -lpng -lm"
 
 have_header 'sqlite3ext.h'
 
