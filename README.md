@@ -35,6 +35,7 @@ Please open a [GitHub issue](https://github.com/westonplatter/phashion/issues/) 
 Linux  
 - libjpeg-dev
 - libpng-dev
+- libsqlite3-dev
 
 Mac
 - [imagemagick](http://www.imagemagick.org/)

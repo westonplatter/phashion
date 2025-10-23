@@ -17,7 +17,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
       - name: Install xmllint
-        run: sudo apt-get install -y libpng-dev libjpeg-dev
+        run: sudo apt-get install -y libpng-dev libjpeg-dev libsqlite3-dev imagemagick
       - name: Install dependencies
         run: bundle install
       - name: Compile
