@@ -20,6 +20,5 @@ Gem::Specification.new do |s|
   
   s.add_development_dependency "rake-compiler", ">= 0.7.0"
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "minitest", "~> 5.2.2"
+  s.add_development_dependency "minitest", ">= 5.21.0"
 end
-
