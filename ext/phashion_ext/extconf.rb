@@ -6,11 +6,11 @@ BUNDLE_PATH = BUNDLE.gsub(".tar.gz", "")
 $CFLAGS = " -x c++ #{ENV["CFLAGS"]}"
 $CFLAGS += " -fdeclspec" if RUBY_PLATFORM =~ /darwin/
 $includes = " -I#{HERE}/include"
-$libraries = " -L#{HERE}/lib -L/usr/local/lib"
+$libraries = " -L#{HERE}/lib -L/usr/local/lib -L/opt/homebrew/lib"
 $LIBPATH = ["#{HERE}/lib"]
 $CFLAGS = "#{$includes} #{$libraries} #{$CFLAGS}"
 $LDFLAGS = "#{$libraries} #{$LDFLAGS}"
-$CXXFLAGS = ' -pthread'  
+$CXXFLAGS = ' -pthread -I/opt/homebrew/include'
 
 Dir.chdir(HERE) do
   if File.exist?("lib")
@@ -18,6 +18,12 @@ Dir.chdir(HERE) do
   else
 
     puts(cmd = "tar xzf #{BUNDLE} 2>&1")
+    raise "'#{cmd}' failed" unless system(cmd)
+
+    puts(cmd = "cp config.sub #{BUNDLE_PATH}")
+    raise "'#{cmd}' failed" unless system(cmd)
+
+    puts(cmd = "cp config.guess #{BUNDLE_PATH}")
     raise "'#{cmd}' failed" unless system(cmd)
 
     Dir.chdir(BUNDLE_PATH) do
