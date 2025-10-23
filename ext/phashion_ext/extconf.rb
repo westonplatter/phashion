@@ -1,4 +1,5 @@
 require 'mkmf'
+require 'fileutils'
 
 HERE = File.expand_path(File.dirname(__FILE__))
 BUNDLE = Dir.glob("#{HERE}/pHash-*.tar.gz").first
@@ -6,11 +7,11 @@ BUNDLE_PATH = BUNDLE.gsub(".tar.gz", "")
 $CFLAGS = " -x c++ #{ENV["CFLAGS"]}"
 $CFLAGS += " -fdeclspec" if RUBY_PLATFORM =~ /darwin/
 $includes = " -I#{HERE}/include"
-$libraries = " -L#{HERE}/lib -L/usr/local/lib"
+$libraries = " -L#{HERE}/lib -L/usr/local/lib -L/opt/homebrew/lib"
 $LIBPATH = ["#{HERE}/lib"]
 $CFLAGS = "#{$includes} #{$libraries} #{$CFLAGS}"
 $LDFLAGS = "#{$libraries} #{$LDFLAGS}"
-$CXXFLAGS = ' -pthread'  
+$CXXFLAGS = ' -pthread -I/opt/homebrew/include'
 
 Dir.chdir(HERE) do
   if File.exist?("lib")
@@ -19,6 +20,9 @@ Dir.chdir(HERE) do
 
     puts(cmd = "tar xzf #{BUNDLE} 2>&1")
     raise "'#{cmd}' failed" unless system(cmd)
+
+    FileUtils.cp "#{HERE}/config.guess", "#{BUNDLE_PATH}/config.guess"
+    FileUtils.cp "#{HERE}/config.sub", "#{BUNDLE_PATH}/config.sub"
 
     Dir.chdir(BUNDLE_PATH) do
       puts(cmd = "env CXXFLAGS='#{$CXXFLAGS}' CFLAGS='#{$CFLAGS}' LDFLAGS='#{$LDFLAGS}' ./configure --prefix=#{HERE} --disable-audio-hash --disable-video-hash --disable-shared --with-pic 2>&1")
